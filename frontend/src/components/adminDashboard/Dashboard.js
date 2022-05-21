@@ -1,666 +1,885 @@
-import { useEffect, useState } from "react";
-import PieChart from "./pieChart";
+import React, { Component } from "react";
 
-const Dashboard = () => {
-  const [record, setRecord] = useState([]);
-
-  const getData = () => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((resposne) => resposne.json())
-      .then((res) => setRecord(res));
-  };
-
-  useEffect(() => {
-    getData();
-  });
-
-  return (
-    <div class="col main pt-5 mt-3">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Home</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="#">Library</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Data
-          </li>
-        </ol>
-      </nav>
-      <p class="lead d-none d-sm-block">Add Employee Details and Records</p>
-
-      <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">×</span>
-          <span class="sr-only">Close</span>
-        </button>
-        <strong>Data and Records</strong> Learn more about employee
-      </div>
-      <div class="row mb-3">
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card bg-success text-white h-100">
-            <div
-              class="card-body bg-success"
-              style={{ backgroundColor: "#57b960" }}
-            >
-              <div class="rotate">
-                <i class="fa fa-user fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Users</h6>
-              <h1 class="display-4">134</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card text-white bg-danger h-100">
-            <div class="card-body bg-danger">
-              <div class="rotate">
-                <i class="fa fa-list fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Posts</h6>
-              <h1 class="display-4">87</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card text-white bg-info h-100">
-            <div class="card-body bg-info">
-              <div class="rotate">
-                <i class="fab fa-twitter fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Tweets</h6>
-              <h1 class="display-4">125</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card text-white bg-warning h-100">
-            <div class="card-body">
-              <div class="rotate">
-                <i class="fa fa-share fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Shares</h6>
-              <h1 class="display-4">36</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <hr />
-      {/* <div class="row placeholders mb-3">
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/dddddd/fff?text=1" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>Responsive</h4>
-                <span class="text-muted">Device agnostic</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/e4e4e4/fff?text=2" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>Frontend</h4>
-                <span class="text-muted">UI / UX oriented</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/d6d6d6/fff?text=3" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>HTML5</h4>
-                <span class="text-muted">Standards-based</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/e0e0e0/fff?text=4" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>Framework</h4>
-                <span class="text-muted">CSS and JavaScript</span>
-            </div>
-        </div> */}
-
-      <div class="row ">
-        <div class="col-lg-7 col-md-6 col-sm-12">
-          <h5 class="mt-3 mb-3 text-secondary">
-            Check More Records of Employees
-          </h5>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead class="thead-light">
-                <tr>
-                  <th>No</th>
-                  <th>Label</th>
-                  <th>Header</th>
-                  <th>Column</th>
-                  <th>Record Data</th>
-                </tr>
-              </thead>
-              <tbody>
-                {record.slice(0, 5).map((output) => (
-                  <tr>
-                    <td>{output.id}</td>
-                    <td>{output.name}</td>
-                    <td>{output.email}</td>
-                    <td>{output.username}</td>
-                    <td>{output.website}</td>
-                    <td></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="col-lg-5 col-md-6 col-sm-12 col-sm-offset-5">
-          <h4 className="title mt-3 mb-3 text-center text-secondary">
-            Data in Chart
-          </h4>
-          <div className="mb-5" style={{ height: "300px", width: "400px" }}>
-            <PieChart />{" "}
-          </div>
-        </div>
-      </div>
-
-      <a id="more"></a>
-      <hr />
-      <h2 class="sub-header mt-5">
-        Use card decks for equal height rows of cards
-      </h2>
-      <div class="mb-3">
-        <div class="card-deck">
-          <div class="card card-inverse card-success text-center">
-            <div class="card-body">
-              <blockquote class="card-blockquote">
-                <p>
-                  It's really good news that the new Bootstrap 4 now has support
-                  for CSS 3 flexbox.
-                </p>
-                <footer>
-                  Makes flexible layouts{" "}
-                  <cite title="Source Title">Faster</cite>
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-          <div class="card card-inverse card-danger text-center">
-            <div class="card-body">
-              <blockquote class="card-blockquote">
-                <p>
-                  The Bootstrap 3.x element that was called "Panel" before, is
-                  now called a "Card".
-                </p>
-                <footer>
-                  All of this makes more <cite title="Source Title">Sense</cite>
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-          <div class="card card-inverse card-warning text-center">
-            <div class="card-body">
-              <blockquote class="card-blockquote">
-                <p>
-                  There are also some interesting new text classes for uppercase
-                  and capitalize.
-                </p>
-                <footer>
-                  These handy utilities make it{" "}
-                  <cite title="Source Title">Easy</cite>
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-          <div class="card card-inverse card-info text-center">
-            <div class="card-body">
-              <blockquote class="card-blockquote">
-                <p>
-                  If you want to use cool icons in Bootstrap 4, you'll have to
-                  find your own such as Font Awesome or Ionicons.
-                </p>
-                <footer>
-                  The Glyphicons are not{" "}
-                  <cite title="Source Title">Included</cite>
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <a id="flexbox"></a>
-      <hr />
-      <h2 class="mt-5">Masonry-style grid columns</h2>
-      <h6>with Bootstrap 4 flexbox</h6>
-
-      <div class="card-columns mb-3">
-        <div class="card">
-          <img
-            class="card-img-top img-fluid"
-            src="//placehold.it/600x200/444/fff?text=..."
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h4 class="card-title">New XL Grid Tier</h4>
-            <p class="card-text">
-              With screens getting smaller, Bootstrap 4 introduces a new grid
-              breakpoint with the col-xl-* classes. This extra tier extends the
-              media query range all the way down to 576 px. Eventhough the new
-              XL tier would make one think it’s been added to support extra
-              large screens, it’s actually the opposite.
-            </p>
-          </div>
-        </div>
-        <div class="card card-body">
-          <blockquote class="card-blockquote">
-            <p>Bootstrap 4 will be lighter and easier to customize.</p>
-            <footer>
-              <small class="text-muted">
-                Someone famous like <cite title="Source Title">Mark Otto</cite>
-              </small>
-            </footer>
-          </blockquote>
-        </div>
-        <div class="card">
-          <img
-            class="card-img-top img-fluid"
-            src="//placehold.it/600x200/bbb/fff?text=..."
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">
-              This card has supporting text below as a natural lead-in to
-              additional content.
-            </p>
-            <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div class="card card-body card-inverse card-primary text-center">
-          <blockquote class="card-blockquote">
-            <p>
-              Create masonry or Pinterest-style card layouts in Bootstrap 4.
-            </p>
-            <footer>
-              <small>
-                Someone famous in <cite title="Source Title">Bootstrap</cite>
-              </small>
-            </footer>
-          </blockquote>
-        </div>
-        <div class="card card-body text-center">
-          <h4 class="card-title">Clever heading</h4>
-          <p class="card-text">
-            This card has supporting text below as a natural lead-in to
-            additional content.
-          </p>
-          <p class="card-text">
-            <small class="text-muted">Last updated 5 mins ago</small>
-          </p>
-        </div>
-        <div class="card">
-          <img
-            class="card-img img-fluid"
-            src="//placehold.it/600x200/777/fff?text=..."
-            alt="Card image"
-          />
-        </div>
-        <div class="card card-body text-right">
-          <blockquote class="card-blockquote">
-            <p>
-              There are also some interesting new text classes to uppercase or
-              capitalize.
-            </p>
-            <footer>
-              <small class="text-muted">
-                Someone famous in <cite title="Source Title">Bootstrap</cite>
-              </small>
-            </footer>
-          </blockquote>
-        </div>
-        <div class="card card-body">
-          <h4 class="card-title">Responsive</h4>
-          <p class="card-text">
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </p>
-          <p class="card-text">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li class="text-capitalize">
-                <code class="text-lowercase">text-capitalize</code> Capitalize
-                each word
-              </li>
-              <li class="text-uppercase">
-                <code class="text-lowercase">text-uppercase</code> Uppercase
-                text
-              </li>
-              <li class="text-success">
-                <code>text-success</code> Contextual colors for text
-              </li>
-              <li>
-                <code>text-muted</code>{" "}
-                <span class="text-muted">Lighten with muted</span>
-              </li>
-              <li>
-                <code>text-info</code>{" "}
-                <span class="text-muted">Info text color</span>
-              </li>
-              <li>
-                <code>text-danger</code>{" "}
-                <span class="text-muted">Danger text color</span>
-              </li>
-              <li>
-                <code>text-warning</code>{" "}
-                <span class="text-muted">Warning text color</span>
-              </li>
-              <li>
-                <code>text-primary</code>{" "}
-                <span class="text-primary">Primary text color</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card card-body">
-          <h4 class="card-title">Heading</h4>
-          <p class="card-text">
-            So now that you've seen some of what Bootstrap 4 has to offer, are
-            you going to give it a try?
-          </p>
-          <p class="card-text">
-            <small class="text-muted">Last updated 12 mins ago</small>
-          </p>
-        </div>
-      </div>
-
-      <a id="layouts"></a>
-      <hr />
-      <h2 class="sub-header mt-5">Interesting layouts and elements</h2>
-      <div class="row mb-3">
-        <div class="col-lg-6">
-          <div class="card mb-3">
-            <div class="card-header">Bye .well, .panel &amp; .thumbnail</div>
-            <div class="card-body">
-              <h4 class="card-title">Replaced with .card</h4>
-              <p class="card-text">
-                All of these Bootstrap 3.x components have been dropped entirely
-                for the new card component.
-              </p>
-              <button type="button" class="btn btn-secondary btn-lg">
-                Large
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                href="#home1"
-                role="tab"
-                data-toggle="tab"
-              >
-                Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#profile1" role="tab" data-toggle="tab">
-                Profile
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#messages1"
-                role="tab"
-                data-toggle="tab"
-              >
-                Messages
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#settings1"
-                role="tab"
-                data-toggle="tab"
-              >
-                Settings
-              </a>
-            </li>
-          </ul>
-
-          <div class="tab-content">
-            <br />
-            <div role="tabpanel" class="tab-pane active" id="home1">
-              <h4>Home</h4>
-              <p>
-                1. These Bootstrap 4 Tabs work basically the same as the
-                Bootstrap 3.x tabs.
-                <br />
-                <br />
-                <button class="btn btn-primary-outline btn-lg">Wow</button>
-              </p>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="profile1">
-              <h4>Pro</h4>
-              <p>
-                2. Tabs are helpful to hide or collapse some addtional content.
-              </p>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="messages1">
-              <h4>Messages</h4>
-              <p>3. You can really put whatever you want into the tab pane.</p>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="settings1">
-              <h4>Settings</h4>
-              <p>
-                4. Some of the Bootstrap 3.x components like well and panel have
-                been dropped for the new card component.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-lg-6">
-          <div class="card card-default card-body">
-            <ul id="tabsJustified" class="nav nav-tabs nav-justified">
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href=""
-                  data-target="#tab1"
-                  data-toggle="tab"
-                >
-                  List
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  href=""
-                  data-target="#tab2"
-                  data-toggle="tab"
-                >
-                  Profile
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href=""
-                  data-target="#tab3"
-                  data-toggle="tab"
-                >
-                  More
-                </a>
-              </li>
-            </ul>
-
-            <br />
-            <div id="tabsJustifiedContent" class="tab-content">
-              <div class="tab-pane" id="tab1">
-                <div class="list-group">
-                  <a href="" class="list-group-item">
-                    <span class="float-right label label-success">51</span> Home
-                    Link
-                  </a>
-                  <a href="" class="list-group-item">
-                    <span class="float-right label label-success">8</span> Link
-                    2
-                  </a>
-                  <a href="" class="list-group-item">
-                    <span class="float-right label label-success">23</span> Link
-                    3
-                  </a>
-                  <a href="" class="list-group-item text-muted">
-                    Link n..
-                  </a>
+export default class Dashboard extends Component {
+  render() {
+    return (
+      <div>
+        <div className="content-wrapper">
+          {/* Content Header (Page header) */}
+          <div className="content-header">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1 className="m-0 text-dark">Dashboard</h1>
                 </div>
+                {/* /.col */}
+                <div className="col-sm-6">
+                  <ol className="breadcrumb float-sm-right">
+                    <li className="breadcrumb-item">
+                      <a href="#">Home</a>
+                    </li>
+                    <li className="breadcrumb-item active">Dashboard v1</li>
+                  </ol>
+                </div>
+                {/* /.col */}
               </div>
-              <div class="tab-pane active" id="tab2">
-                <div class="row">
-                  <div class="col-sm-7">
-                    <h4>Profile Section</h4>
-                    <p>
-                      Imagine creating this simple user profile inside a tab
-                      card.
-                    </p>
-                  </div>
-                  <div class="col-sm-5">
-                    <img
-                      src="//placehold.it/170"
-                      class="float-right img-responsive img-rounded"
-                    />
+              {/* /.row */}
+            </div>
+            {/* /.container-fluid */}
+          </div>
+          {/* /.content-header */}
+          {/* Main content */}
+          <section className="content">
+            <div className="container-fluid">
+              {/* Small boxes (Stat box) */}
+              <div className="row">
+                <div className="col-lg-3 col-6">
+                  {/* small box */}
+                  <div className="small-box bg-info">
+                    <div className="inner">
+                      <h3>150</h3>
+                      <p>New Orders</p>
+                    </div>
+                    <div className="icon">
+                      <i className="ion ion-bag" />
+                    </div>
+                    <a href="#" className="small-box-footer">
+                      More info <i className="fas fa-arrow-circle-right" />
+                    </a>
                   </div>
                 </div>
-                <hr />
-                <a href="javascript:;" class="btn btn-info btn-block">
-                  Read More Profiles
-                </a>
-                <div class="spacer5"></div>
-              </div>
-              <div class="tab-pane" id="tab3">
-                <div class="list-group">
-                  <a href="" class="list-group-item">
-                    <span class="float-right label label-info label-pill">
-                      44
-                    </span>{" "}
-                    <code>.panel</code> is now <code>.card</code>
-                  </a>
-                  <a href="" class="list-group-item">
-                    <span class="float-right label label-info label-pill">
-                      8
-                    </span>{" "}
-                    <code>.nav-justified</code> is deprecated
-                  </a>
-                  <a href="" class="list-group-item">
-                    <span class="float-right label label-info label-pill">
-                      23
-                    </span>{" "}
-                    <code>.badge</code> is now <code>.label-pill</code>
-                  </a>
-                  <a href="" class="list-group-item text-muted">
-                    Message n..
-                  </a>
+                {/* ./col */}
+                <div className="col-lg-3 col-6">
+                  {/* small box */}
+                  <div className="small-box bg-success">
+                    <div className="inner">
+                      <h3>
+                        53<sup style={{ fontSize: 20 }}>%</sup>
+                      </h3>
+                      <p>Bounce Rate</p>
+                    </div>
+                    <div className="icon">
+                      <i className="ion ion-stats-bars" />
+                    </div>
+                    <a href="#" className="small-box-footer">
+                      More info <i className="fas fa-arrow-circle-right" />
+                    </a>
+                  </div>
                 </div>
+                {/* ./col */}
+                <div className="col-lg-3 col-6">
+                  {/* small box */}
+                  <div className="small-box bg-warning">
+                    <div className="inner">
+                      <h3>44</h3>
+                      <p>User Registrations</p>
+                    </div>
+                    <div className="icon">
+                      <i className="ion ion-person-add" />
+                    </div>
+                    <a href="#" className="small-box-footer">
+                      More info <i className="fas fa-arrow-circle-right" />
+                    </a>
+                  </div>
+                </div>
+                {/* ./col */}
+                <div className="col-lg-3 col-6">
+                  {/* small box */}
+                  <div className="small-box bg-danger">
+                    <div className="inner">
+                      <h3>65</h3>
+                      <p>Unique Visitors</p>
+                    </div>
+                    <div className="icon">
+                      <i className="ion ion-pie-graph" />
+                    </div>
+                    <a href="#" className="small-box-footer">
+                      More info <i className="fas fa-arrow-circle-right" />
+                    </a>
+                  </div>
+                </div>
+                {/* ./col */}
               </div>
+              {/* /.row */}
+              {/* Main row */}
+              <div className="row">
+                {/* Left col */}
+                <section className="col-lg-7 connectedSortable">
+                  {/* Custom tabs (Charts with tabs)*/}
+                  <div className="card">
+                    <div className="card-header">
+                      <h3 className="card-title">
+                        <i className="fas fa-chart-pie mr-1" />
+                        Sales
+                      </h3>
+                      <div className="card-tools">
+                        <ul className="nav nav-pills ml-auto">
+                          <li className="nav-item">
+                            <a
+                              className="nav-link active"
+                              href="#revenue-chart"
+                              data-toggle="tab"
+                            >
+                              Area
+                            </a>
+                          </li>
+                          <li className="nav-item">
+                            <a
+                              className="nav-link"
+                              href="#sales-chart"
+                              data-toggle="tab"
+                            >
+                              Donut
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    {/* /.card-header */}
+                    <div className="card-body">
+                      <div className="tab-content p-0">
+                        {/* Morris chart - Sales */}
+                        <div
+                          className="chart tab-pane active"
+                          id="revenue-chart"
+                          style={{ position: "relative", height: 300 }}
+                        >
+                          <canvas
+                            id="revenue-chart-canvas"
+                            height={300}
+                            style={{ height: 300 }}
+                          />
+                        </div>
+                        <div
+                          className="chart tab-pane"
+                          id="sales-chart"
+                          style={{ position: "relative", height: 300 }}
+                        >
+                          <canvas
+                            id="sales-chart-canvas"
+                            height={300}
+                            style={{ height: 300 }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    {/* /.card-body */}
+                  </div>
+                  {/* /.card */}
+                  {/* DIRECT CHAT */}
+                  <div className="card direct-chat direct-chat-primary">
+                    <div className="card-header">
+                      <h3 className="card-title">Direct Chat</h3>
+                      <div className="card-tools">
+                        <span
+                          data-toggle="tooltip"
+                          title="3 New Messages"
+                          className="badge badge-primary"
+                        >
+                          3
+                        </span>
+                        <button
+                          type="button"
+                          className="btn btn-tool"
+                          data-card-widget="collapse"
+                        >
+                          <i className="fas fa-minus" />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-tool"
+                          data-toggle="tooltip"
+                          title="Contacts"
+                          data-widget="chat-pane-toggle"
+                        >
+                          <i className="fas fa-comments" />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-tool"
+                          data-card-widget="remove"
+                        >
+                          <i className="fas fa-times" />
+                        </button>
+                      </div>
+                    </div>
+                    {/* /.card-header */}
+                    <div className="card-body">
+                      {/* Conversations are loaded here */}
+                      <div className="direct-chat-messages">
+                        {/* Message. Default to the left */}
+                        <div className="direct-chat-msg">
+                          <div className="direct-chat-infos clearfix">
+                            <span className="direct-chat-name float-left">
+                              Alexander Pierce
+                            </span>
+                            <span className="direct-chat-timestamp float-right">
+                              23 Jan 2:00 pm
+                            </span>
+                          </div>
+                          {/* /.direct-chat-infos */}
+                          <img
+                            className="direct-chat-img"
+                            src="dist/img/user1-128x128.jpg"
+                            alt="message user image"
+                          />
+                          {/* /.direct-chat-img */}
+                          <div className="direct-chat-text">
+                            Is this template really for free? That's
+                            unbelievable!
+                          </div>
+                          {/* /.direct-chat-text */}
+                        </div>
+                        {/* /.direct-chat-msg */}
+                        {/* Message to the right */}
+                        <div className="direct-chat-msg right">
+                          <div className="direct-chat-infos clearfix">
+                            <span className="direct-chat-name float-right">
+                              Sarah Bullock
+                            </span>
+                            <span className="direct-chat-timestamp float-left">
+                              23 Jan 2:05 pm
+                            </span>
+                          </div>
+                          {/* /.direct-chat-infos */}
+                          <img
+                            className="direct-chat-img"
+                            src="dist/img/user3-128x128.jpg"
+                            alt="message user image"
+                          />
+                          {/* /.direct-chat-img */}
+                          <div className="direct-chat-text">
+                            You better believe it!
+                          </div>
+                          {/* /.direct-chat-text */}
+                        </div>
+                        {/* /.direct-chat-msg */}
+                        {/* Message. Default to the left */}
+                        <div className="direct-chat-msg">
+                          <div className="direct-chat-infos clearfix">
+                            <span className="direct-chat-name float-left">
+                              Alexander Pierce
+                            </span>
+                            <span className="direct-chat-timestamp float-right">
+                              23 Jan 5:37 pm
+                            </span>
+                          </div>
+                          {/* /.direct-chat-infos */}
+                          <img
+                            className="direct-chat-img"
+                            src="dist/img/user1-128x128.jpg"
+                            alt="message user image"
+                          />
+                          {/* /.direct-chat-img */}
+                          <div className="direct-chat-text">
+                            Working with AdminLTE on a great new app! Wanna
+                            join?
+                          </div>
+                          {/* /.direct-chat-text */}
+                        </div>
+                        {/* /.direct-chat-msg */}
+                        {/* Message to the right */}
+                        <div className="direct-chat-msg right">
+                          <div className="direct-chat-infos clearfix">
+                            <span className="direct-chat-name float-right">
+                              Sarah Bullock
+                            </span>
+                            <span className="direct-chat-timestamp float-left">
+                              23 Jan 6:10 pm
+                            </span>
+                          </div>
+                          {/* /.direct-chat-infos */}
+                          <img
+                            className="direct-chat-img"
+                            src="dist/img/user3-128x128.jpg"
+                            alt="message user image"
+                          />
+                          {/* /.direct-chat-img */}
+                          <div className="direct-chat-text">
+                            I would love to.
+                          </div>
+                          {/* /.direct-chat-text */}
+                        </div>
+                        {/* /.direct-chat-msg */}
+                      </div>
+                      {/*/.direct-chat-messages*/}
+                      {/* Contacts are loaded here */}
+                      <div className="direct-chat-contacts">
+                        <ul className="contacts-list">
+                          <li>
+                            <a href="#">
+                              <img
+                                className="contacts-list-img"
+                                src="dist/img/user1-128x128.jpg"
+                              />
+                              <div className="contacts-list-info">
+                                <span className="contacts-list-name">
+                                  Count Dracula
+                                  <small className="contacts-list-date float-right">
+                                    2/28/2015
+                                  </small>
+                                </span>
+                                <span className="contacts-list-msg">
+                                  How have you been? I was...
+                                </span>
+                              </div>
+                              {/* /.contacts-list-info */}
+                            </a>
+                          </li>
+                          {/* End Contact Item */}
+                          <li>
+                            <a href="#">
+                              <img
+                                className="contacts-list-img"
+                                src="dist/img/user7-128x128.jpg"
+                              />
+                              <div className="contacts-list-info">
+                                <span className="contacts-list-name">
+                                  Sarah Doe
+                                  <small className="contacts-list-date float-right">
+                                    2/23/2015
+                                  </small>
+                                </span>
+                                <span className="contacts-list-msg">
+                                  I will be waiting for...
+                                </span>
+                              </div>
+                              {/* /.contacts-list-info */}
+                            </a>
+                          </li>
+                          {/* End Contact Item */}
+                          <li>
+                            <a href="#">
+                              <img
+                                className="contacts-list-img"
+                                src="dist/img/user3-128x128.jpg"
+                              />
+                              <div className="contacts-list-info">
+                                <span className="contacts-list-name">
+                                  Nadia Jolie
+                                  <small className="contacts-list-date float-right">
+                                    2/20/2015
+                                  </small>
+                                </span>
+                                <span className="contacts-list-msg">
+                                  I'll call you back at...
+                                </span>
+                              </div>
+                              {/* /.contacts-list-info */}
+                            </a>
+                          </li>
+                          {/* End Contact Item */}
+                          <li>
+                            <a href="#">
+                              <img
+                                className="contacts-list-img"
+                                src="dist/img/user5-128x128.jpg"
+                              />
+                              <div className="contacts-list-info">
+                                <span className="contacts-list-name">
+                                  Nora S. Vans
+                                  <small className="contacts-list-date float-right">
+                                    2/10/2015
+                                  </small>
+                                </span>
+                                <span className="contacts-list-msg">
+                                  Where is your new...
+                                </span>
+                              </div>
+                              {/* /.contacts-list-info */}
+                            </a>
+                          </li>
+                          {/* End Contact Item */}
+                          <li>
+                            <a href="#">
+                              <img
+                                className="contacts-list-img"
+                                src="dist/img/user6-128x128.jpg"
+                              />
+                              <div className="contacts-list-info">
+                                <span className="contacts-list-name">
+                                  John K.
+                                  <small className="contacts-list-date float-right">
+                                    1/27/2015
+                                  </small>
+                                </span>
+                                <span className="contacts-list-msg">
+                                  Can I take a look at...
+                                </span>
+                              </div>
+                              {/* /.contacts-list-info */}
+                            </a>
+                          </li>
+                          {/* End Contact Item */}
+                          <li>
+                            <a href="#">
+                              <img
+                                className="contacts-list-img"
+                                src="dist/img/user8-128x128.jpg"
+                              />
+                              <div className="contacts-list-info">
+                                <span className="contacts-list-name">
+                                  Kenneth M.
+                                  <small className="contacts-list-date float-right">
+                                    1/4/2015
+                                  </small>
+                                </span>
+                                <span className="contacts-list-msg">
+                                  Never mind I found...
+                                </span>
+                              </div>
+                              {/* /.contacts-list-info */}
+                            </a>
+                          </li>
+                          {/* End Contact Item */}
+                        </ul>
+                        {/* /.contacts-list */}
+                      </div>
+                      {/* /.direct-chat-pane */}
+                    </div>
+                    {/* /.card-body */}
+                    <div className="card-footer">
+                      <form action="#" method="post">
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            name="message"
+                            placeholder="Type Message ..."
+                            className="form-control"
+                          />
+                          <span className="input-group-append">
+                            <button type="button" className="btn btn-primary">
+                              Send
+                            </button>
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                    {/* /.card-footer*/}
+                  </div>
+                  {/*/.direct-chat */}
+                  {/* TO DO List */}
+                  <div className="card">
+                    <div className="card-header">
+                      <h3 className="card-title">
+                        <i className="ion ion-clipboard mr-1" />
+                        To Do List
+                      </h3>
+                      <div className="card-tools">
+                        <ul className="pagination pagination-sm">
+                          <li className="page-item">
+                            <a href="#" className="page-link">
+                              «
+                            </a>
+                          </li>
+                          <li className="page-item">
+                            <a href="#" className="page-link">
+                              1
+                            </a>
+                          </li>
+                          <li className="page-item">
+                            <a href="#" className="page-link">
+                              2
+                            </a>
+                          </li>
+                          <li className="page-item">
+                            <a href="#" className="page-link">
+                              3
+                            </a>
+                          </li>
+                          <li className="page-item">
+                            <a href="#" className="page-link">
+                              »
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    {/* /.card-header */}
+                    <div className="card-body">
+                      <ul className="todo-list" data-widget="todo-list">
+                        <li>
+                          {/* drag handle */}
+                          <span className="handle">
+                            <i className="fas fa-ellipsis-v" />
+                            <i className="fas fa-ellipsis-v" />
+                          </span>
+                          {/* checkbox */}
+                          <div className="icheck-primary d-inline ml-2">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              name="todo1"
+                              id="todoCheck1"
+                            />
+                            <label htmlFor="todoCheck1" />
+                          </div>
+                          {/* todo text */}
+                          <span className="text">Design a nice theme</span>
+                          {/* Emphasis label */}
+                          <small className="badge badge-danger">
+                            <i className="far fa-clock" /> 2 mins
+                          </small>
+                          {/* General tools such as edit or delete*/}
+                          <div className="tools">
+                            <i className="fas fa-edit" />
+                            <i className="fas fa-trash-o" />
+                          </div>
+                        </li>
+                        <li>
+                          <span className="handle">
+                            <i className="fas fa-ellipsis-v" />
+                            <i className="fas fa-ellipsis-v" />
+                          </span>
+                          <div className="icheck-primary d-inline ml-2">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              name="todo2"
+                              id="todoCheck2"
+                              defaultChecked
+                            />
+                            <label htmlFor="todoCheck2" />
+                          </div>
+                          <span className="text">
+                            Make the theme responsive
+                          </span>
+                          <small className="badge badge-info">
+                            <i className="far fa-clock" /> 4 hours
+                          </small>
+                          <div className="tools">
+                            <i className="fas fa-edit" />
+                            <i className="fas fa-trash-o" />
+                          </div>
+                        </li>
+                        <li>
+                          <span className="handle">
+                            <i className="fas fa-ellipsis-v" />
+                            <i className="fas fa-ellipsis-v" />
+                          </span>
+                          <div className="icheck-primary d-inline ml-2">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              name="todo3"
+                              id="todoCheck3"
+                            />
+                            <label htmlFor="todoCheck3" />
+                          </div>
+                          <span className="text">
+                            Let theme shine like a star
+                          </span>
+                          <small className="badge badge-warning">
+                            <i className="far fa-clock" /> 1 day
+                          </small>
+                          <div className="tools">
+                            <i className="fas fa-edit" />
+                            <i className="fas fa-trash-o" />
+                          </div>
+                        </li>
+                        <li>
+                          <span className="handle">
+                            <i className="fas fa-ellipsis-v" />
+                            <i className="fas fa-ellipsis-v" />
+                          </span>
+                          <div className="icheck-primary d-inline ml-2">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              name="todo4"
+                              id="todoCheck4"
+                            />
+                            <label htmlFor="todoCheck4" />
+                          </div>
+                          <span className="text">
+                            Let theme shine like a star
+                          </span>
+                          <small className="badge badge-success">
+                            <i className="far fa-clock" /> 3 days
+                          </small>
+                          <div className="tools">
+                            <i className="fas fa-edit" />
+                            <i className="fas fa-trash-o" />
+                          </div>
+                        </li>
+                        <li>
+                          <span className="handle">
+                            <i className="fas fa-ellipsis-v" />
+                            <i className="fas fa-ellipsis-v" />
+                          </span>
+                          <div className="icheck-primary d-inline ml-2">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              name="todo5"
+                              id="todoCheck5"
+                            />
+                            <label htmlFor="todoCheck5" />
+                          </div>
+                          <span className="text">
+                            Check your messages and notifications
+                          </span>
+                          <small className="badge badge-primary">
+                            <i className="far fa-clock" /> 1 week
+                          </small>
+                          <div className="tools">
+                            <i className="fas fa-edit" />
+                            <i className="fas fa-trash-o" />
+                          </div>
+                        </li>
+                        <li>
+                          <span className="handle">
+                            <i className="fas fa-ellipsis-v" />
+                            <i className="fas fa-ellipsis-v" />
+                          </span>
+                          <div className="icheck-primary d-inline ml-2">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              name="todo6"
+                              id="todoCheck6"
+                            />
+                            <label htmlFor="todoCheck6" />
+                          </div>
+                          <span className="text">
+                            Let theme shine like a star
+                          </span>
+                          <small className="badge badge-secondary">
+                            <i className="far fa-clock" /> 1 month
+                          </small>
+                          <div className="tools">
+                            <i className="fas fa-edit" />
+                            <i className="fas fa-trash-o" />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    {/* /.card-body */}
+                    <div className="card-footer clearfix">
+                      <button
+                        type="button"
+                        className="btn btn-info float-right"
+                      >
+                        <i className="fas fa-plus" /> Add item
+                      </button>
+                    </div>
+                  </div>
+                  {/* /.card */}
+                </section>
+                {/* /.Left col */}
+                {/* right col (We are only adding the ID to make the widgets sortable)*/}
+                <section className="col-lg-5 connectedSortable">
+                  {/* Map card */}
+                  <div className="card bg-gradient-primary">
+                    <div className="card-header border-0">
+                      <h3 className="card-title">
+                        <i className="fas fa-map-marker-alt mr-1" />
+                        Visitors
+                      </h3>
+                      {/* card tools */}
+                      <div className="card-tools">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-sm daterange"
+                          data-toggle="tooltip"
+                          title="Date range"
+                        >
+                          <i className="far fa-calendar-alt" />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-sm"
+                          data-card-widget="collapse"
+                          data-toggle="tooltip"
+                          title="Collapse"
+                        >
+                          <i className="fas fa-minus" />
+                        </button>
+                      </div>
+                      {/* /.card-tools */}
+                    </div>
+                    <div className="card-body">
+                      <div
+                        id="world-map"
+                        style={{ height: 250, width: "100%" }}
+                      />
+                    </div>
+                    {/* /.card-body*/}
+                    <div className="card-footer bg-transparent">
+                      <div className="row">
+                        <div className="col-4 text-center">
+                          <div id="sparkline-1" />
+                          <div className="text-white">Visitors</div>
+                        </div>
+                        {/* ./col */}
+                        <div className="col-4 text-center">
+                          <div id="sparkline-2" />
+                          <div className="text-white">Online</div>
+                        </div>
+                        {/* ./col */}
+                        <div className="col-4 text-center">
+                          <div id="sparkline-3" />
+                          <div className="text-white">Sales</div>
+                        </div>
+                        {/* ./col */}
+                      </div>
+                      {/* /.row */}
+                    </div>
+                  </div>
+                  {/* /.card */}
+                  {/* solid sales graph */}
+                  <div className="card bg-gradient-info">
+                    <div className="card-header border-0">
+                      <h3 className="card-title">
+                        <i className="fas fa-th mr-1" />
+                        Sales Graph
+                      </h3>
+                      <div className="card-tools">
+                        <button
+                          type="button"
+                          className="btn bg-info btn-sm"
+                          data-card-widget="collapse"
+                        >
+                          <i className="fas fa-minus" />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn bg-info btn-sm"
+                          data-card-widget="remove"
+                        >
+                          <i className="fas fa-times" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="card-body">
+                      <canvas
+                        className="chart"
+                        id="line-chart"
+                        style={{
+                          minHeight: 250,
+                          height: 250,
+                          maxHeight: 250,
+                          maxWidth: "100%",
+                        }}
+                      />
+                    </div>
+                    {/* /.card-body */}
+                    <div className="card-footer bg-transparent">
+                      <div className="row">
+                        <div className="col-4 text-center">
+                          <input
+                            type="text"
+                            className="knob"
+                            data-readonly="true"
+                            defaultValue={20}
+                            data-width={60}
+                            data-height={60}
+                            data-fgcolor="#39CCCC"
+                          />
+                          <div className="text-white">Mail-Orders</div>
+                        </div>
+                        {/* ./col */}
+                        <div className="col-4 text-center">
+                          <input
+                            type="text"
+                            className="knob"
+                            data-readonly="true"
+                            defaultValue={50}
+                            data-width={60}
+                            data-height={60}
+                            data-fgcolor="#39CCCC"
+                          />
+                          <div className="text-white">Online</div>
+                        </div>
+                        {/* ./col */}
+                        <div className="col-4 text-center">
+                          <input
+                            type="text"
+                            className="knob"
+                            data-readonly="true"
+                            defaultValue={30}
+                            data-width={60}
+                            data-height={60}
+                            data-fgcolor="#39CCCC"
+                          />
+                          <div className="text-white">In-Store</div>
+                        </div>
+                        {/* ./col */}
+                      </div>
+                      {/* /.row */}
+                    </div>
+                    {/* /.card-footer */}
+                  </div>
+                  {/* /.card */}
+                  {/* Calendar */}
+                  <div className="card bg-gradient-success">
+                    <div className="card-header border-0">
+                      <h3 className="card-title">
+                        <i className="far fa-calendar-alt" />
+                        Calendar
+                      </h3>
+                      {/* tools card */}
+                      <div className="card-tools">
+                        {/* button with a dropdown */}
+                        <div className="btn-group">
+                          <button
+                            type="button"
+                            className="btn btn-success btn-sm dropdown-toggle"
+                            data-toggle="dropdown"
+                          >
+                            <i className="fas fa-bars" />
+                          </button>
+                          <div
+                            className="dropdown-menu float-right"
+                            role="menu"
+                          >
+                            <a href="#" className="dropdown-item">
+                              Add new event
+                            </a>
+                            <a href="#" className="dropdown-item">
+                              Clear events
+                            </a>
+                            <div className="dropdown-divider" />
+                            <a href="#" className="dropdown-item">
+                              View calendar
+                            </a>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn btn-success btn-sm"
+                          data-card-widget="collapse"
+                        >
+                          <i className="fas fa-minus" />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-success btn-sm"
+                          data-card-widget="remove"
+                        >
+                          <i className="fas fa-times" />
+                        </button>
+                      </div>
+                      {/* /. tools */}
+                    </div>
+                    {/* /.card-header */}
+                    <div className="card-body pt-0">
+                      {/*The calendar */}
+                      <div id="calendar" style={{ width: "100%" }} />
+                    </div>
+                    {/* /.card-body */}
+                  </div>
+                  {/* /.card */}
+                </section>
+                {/* right col */}
+              </div>
+              {/* /.row (main row) */}
             </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="card">
-              <div
-                class="card-header"
-                role="tab"
-                id="headingOne"
-                data-toggle="collapse"
-                data-parent="#accordion"
-                href="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                Accordion example
-              </div>
-              <div
-                id="collapseOne"
-                class="card-block collapse in"
-                role="tabpanel"
-                aria-labelledby="headingOne"
-              >
-                <p>
-                  This is a Bootstrap 4 accordion that uses the{" "}
-                  <code>.card</code> classes instead of <code>.panel</code>. The
-                  single-open section aspect is not working because the parent
-                  option (dependent on .panel) has not yet been finalized in BS
-                  4 alpha.{" "}
-                </p>
-              </div>
-              <div
-                class="card-header"
-                role="tab"
-                id="headingTwo"
-                data-toggle="collapse"
-                data-parent="#accordion"
-                href="#collapseTwo"
-                aria-expanded="false"
-                aria-controls="collapseTwo"
-              >
-                Mobile-first
-              </div>
-              <div
-                id="collapseTwo"
-                class="card-block collapse"
-                role="tabpanel"
-                aria-labelledby="headingTwo"
-              >
-                <p>
-                  Just like it's predecesor, Bootstrap 4 is mobile-first so that
-                  you start by designing for smaller devices such as smartphones
-                  and tablets, then proceed to laptop and desktop layouts.
-                </p>
-              </div>
-              <div
-                class="card-header"
-                role="tab"
-                id="headingThree"
-                data-toggle="collapse"
-                data-parent="#accordion"
-                href="#collapseThree"
-                aria-expanded="false"
-                aria-controls="collapseThree"
-              >
-                Built for CSS3
-              </div>
-              <div
-                id="collapseThree"
-                class="card-block collapse"
-                role="tabpanel"
-                aria-labelledby="headingThree"
-              >
-                <p>
-                  Bootstrap employs a handful of important global styles and
-                  settings that you’ll need to be aware of when using it, all of
-                  which are almost exclusively geared towards the normalization
-                  of cross browser styles.
-                </p>
-              </div>
-            </div>
-          </div>
-          <p class="mt-4">
-            <a href="/go/KrUO8QpyXP/bootstrao-4-dashboard" target="_ext">
-              Get this Bootstrap 4 admin dashboard at Codeply
-            </a>
-          </p>
+            {/* /.container-fluid */}
+          </section>
+          {/* /.content */}
         </div>
       </div>
-    </div>
-  );
-};
-
-export default Dashboard;
+    );
+  }
+}

@@ -66,9 +66,9 @@ export default function SignUp() {
 
   const history = useNavigate();
 
-  //   function signup() {
-  //     history.push("/home");
-  //   }
+  function signup() {
+    history.push("/home");
+  }
 
   return (
     <ThemeProvider theme={theme}>
