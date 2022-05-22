@@ -178,11 +178,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={register}
-<<<<<<< HEAD
   
-=======
-              href="./home"
->>>>>>> 16ca9c2ef7ed94cb7f1df791a9a0b6862843bcbd
             >
               Sign Up
             </Button>
