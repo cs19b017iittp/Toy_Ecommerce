@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/action/index";
+import { useNavigate } from "react-router-dom";
 const ProductN = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartBtn, setCartBtn] = useState("ADD TO CART");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const addProduct = (product) => {
     if (cartBtn === "ADD TO CART") {
@@ -44,6 +45,11 @@ const ProductN = () => {
       </>
     );
   };
+
+  const On_click_Handler = () => {
+    navigate("/checkout");
+  };
+
   const ShowProduct = () => {
     return (
       <>
@@ -68,7 +74,10 @@ const ProductN = () => {
               </p>
               <h3 className="display-6 fw-bold my-4">$ {product.price}</h3>
               <p className="lead">{product.description}</p>
-              <button className="btn btn-outline-dark px-4 py-2">
+              <button
+                className="btn btn-outline-dark px-4 py-2"
+                onClick={() => On_click_Handler()}
+              >
                 BUY NOW
               </button>
               <button

@@ -67,7 +67,7 @@ export default function SignUp() {
   const history = useNavigate();
 
   function signup() {
-    history.push("/home");
+    // history.push("/home");
   }
 
   return (
@@ -165,6 +165,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={register}
+              href="./home"
             >
               Sign Up
             </Button>

@@ -1,14 +1,16 @@
 import React from "react";
 import SignIn from "./components/loginForm/Signin";
 import SignUp from "./components/loginForm/SignUp";
-import { Products, Navbar, loginForm } from "./components";
+// import { Products, Navbar, loginForm } from "./components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Navbarnew from "./components/Navbar/Navbarnew";
 import ProductsN from "./components/Products/ProductsN";
 import ProductN from "./components/Products/Product/ProductN";
 import Cart from "./components/Cart";
+import AddressForm from "./components/Checkout/AddressForm";
 import AdminHome from "./components/adminDashboard/adminHome";
+import Checkout from "./components/Checkout/Checkout";
 const App = () => {
   return (
     // <div>
@@ -28,6 +30,7 @@ const App = () => {
         <Route path="/products/:id" element={<ProductN />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/adminhome" element={<AdminHome />} />
+        <Route path="/checkout" element={<Checkout />} />
         {/* <Route path="/login" element={<SignIn />} /> */}
         {/* <Route path="/forget" component={SignUp} exact /> */}
       </Routes>

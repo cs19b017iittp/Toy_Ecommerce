@@ -61,7 +61,7 @@ export default function SignIn() {
       var email = data.get("email");
       for (let i = 0; i < response.data.length; i++) {
         if (response.data[i].email === email) {
-          navigate("/", true`1`);
+          navigate("/");
           break;
         } else {
           alert("account doesnt exists with this mail");
@@ -157,16 +157,32 @@ export default function SignIn() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={
-                  () => {
-                    var flag = true;
-                    if (flag) navigate("/home");
-                    else {
-                      console.error("Incorrect details");
+                onClick={(event) => {
+                  event.preventDefault();
+                  const data = new FormData(event.currentTarget);
+                  // console.log({
+                  //   email: data.get("email"),
+                  //   password: data.get("password"),
+                  // });
+                  // Axios.get("http://localhost:3001/login").then((res) => {
+                  //   console.log("data --> " + res.data[0]);
+                  // });
+
+                  Axios.post("http://localhost:3001/login", {
+                    email: email,
+                    password: password,
+                  }).then((response) => {
+                    var email = data.get("email");
+                    for (let i = 0; i < response.data.length; i++) {
+                      if (response.data[i].email === email) {
+                        navigate("/", true`1`);
+                        break;
+                      } else {
+                        alert("account doesnt exists with this mail");
+                      }
                     }
-                  }
-                  // login
-                }
+                  });
+                }}
               >
                 Sign In
               </Button>
