@@ -1,10 +1,12 @@
-import React from "react";
+// import logo from "./logo.svg";
+// // import "./App.css";
+import Header from "./Title";
+import Menu from "./Deposits";
 import Dashboard from "./Dashboard";
-import Navbar from "./Navbar";
-import Sidebar from "./sidebar";
 
-const AdminHome = () => {
+function App() {
   return (
+<<<<<<< HEAD
     <div>
       <Navbar />
       <div class="container-fluid" id="main">
@@ -13,8 +15,12 @@ const AdminHome = () => {
           <Dashboard />
         </div>
       </div>
+=======
+    <div class="wrapper">
+      <Dashboard />
+>>>>>>> 16ca9c2ef7ed94cb7f1df791a9a0b6862843bcbd
     </div>
   );
-};
+}
 
-export default AdminHome;
+export default App;

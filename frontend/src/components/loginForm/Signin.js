@@ -65,8 +65,12 @@ export default function SignIn() {
       // var email = data.get("email");
       // console.log("email --> "+email+"\n");
       for (let i = 0; i < response.data.length; i++) {
+<<<<<<< HEAD
         if (response.data[i].email === mail) {
           console.log("data email --> "+response.data[i].email+"\n");
+=======
+        if (response.data[i].email === email) {
+>>>>>>> 16ca9c2ef7ed94cb7f1df791a9a0b6862843bcbd
           navigate("/");
           break;
         } else {

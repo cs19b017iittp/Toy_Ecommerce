@@ -26,7 +26,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        A2ZStores
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -79,9 +79,9 @@ export default function SignUp() {
 
   const history = useNavigate();
 
-  //   function signup() {
-  //     history.push("/home");
-  //   }
+  function signup() {
+    // history.push("/home");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -178,7 +178,11 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={register}
+<<<<<<< HEAD
   
+=======
+              href="./home"
+>>>>>>> 16ca9c2ef7ed94cb7f1df791a9a0b6862843bcbd
             >
               Sign Up
             </Button>
