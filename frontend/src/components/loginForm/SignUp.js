@@ -26,7 +26,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        A2ZStores
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -42,7 +42,6 @@ export default function SignUp() {
   const [firstName, setfname] = useState("");
   const [lastName, setlname] = useState("");
   const register = () => {
-    console.log("regis");
     Axios.post("http://localhost:3001/register", {
       firstName: firstName,
       lastName: lastName,

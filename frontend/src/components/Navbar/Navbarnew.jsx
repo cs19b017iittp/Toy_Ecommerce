@@ -77,7 +77,7 @@ const Navbarnew = () => {
             </NavLink>
           </div>
           <div className="buttons">
-            <NavLink to="./signin" className="btn btn-outline-dark me-2">
+            <NavLink to="./about" className="btn btn-outline-dark me-2">
               <i className="fa fa-user me-1"></i>
             </NavLink>
           </div>

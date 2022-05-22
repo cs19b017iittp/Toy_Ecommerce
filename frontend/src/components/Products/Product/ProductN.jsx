@@ -4,6 +4,8 @@ import Skeleton from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/action/index";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios";
+
 const ProductN = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
@@ -15,6 +17,7 @@ const ProductN = () => {
     if (cartBtn === "ADD TO CART") {
       dispatch(addToCart(product));
       setCartBtn("GO TO CART");
+      addCart();
     } else {
       setCartBtn("ADD TO CART");
     }
@@ -44,6 +47,14 @@ const ProductN = () => {
         </div>
       </>
     );
+  };
+
+  const addCart = () => {
+    Axios.post("http://localhost:3001/addItem", {
+      pid: product.id,
+    }).then(() => {
+      console.log("success");
+    });
   };
 
   const On_click_Handler = () => {

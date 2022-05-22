@@ -33,6 +33,23 @@ app.post("/register", (req, res) => {
   );
 });
 
+app.post("/addItem", async (req, res) => {
+  const pid = req.body.pid;
+  // const qty = req.body.qty;
+  console.log(pid);
+  db.query(
+    "INSERT INTO cart (cid,pid,qty) VALUES (?,?,?)",
+    ["3", pid, "1"],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("values inserted");
+      }
+    }
+  );
+});
+
 app.post("/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;

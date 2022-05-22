@@ -1,17 +1,13 @@
 // import logo from "./logo.svg";
 // // import "./App.css";
-import Header from "./header";
-import Menu from "./sidebar";
+import Header from "./Title";
+import Menu from "./Deposits";
 import Dashboard from "./Dashboard";
-import Footer from "./footer";
 
 function App() {
   return (
     <div class="wrapper">
-      <Header />
-      <Menu />
       <Dashboard />
-      <Footer />
     </div>
   );
 }
