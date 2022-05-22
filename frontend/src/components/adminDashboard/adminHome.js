@@ -10,7 +10,7 @@ const AdminHome = () => {
       <div class="container-fluid" id="main">
         <div class="row row-offcanvas row-offcanvas-left">
           <Sidebar />
-          {/* <Dashboard /> */}
+          <Dashboard />
         </div>
       </div>
     </div>

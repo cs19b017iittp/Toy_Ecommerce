@@ -41,8 +41,11 @@ export default function SignUp() {
   const [password, setpassword] = useState("");
   const [firstName, setfname] = useState("");
   const [lastName, setlname] = useState("");
+  const navigate = useNavigate();
+
   const register = () => {
     console.log("regis");
+    
     Axios.post("http://localhost:3001/register", {
       firstName: firstName,
       lastName: lastName,
@@ -50,6 +53,11 @@ export default function SignUp() {
       password: password,
     }).then(() => {
       console.log("success");
+      // var fname = document.getElementById("firstName").value;
+      // var lname = document.getElementById("lastName").value;
+      // var mail = document.getElementById("email").value;
+      // var pass = document.getElementById("password").value;
+      
     });
   };
 
@@ -62,6 +70,11 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     });
+    if(data.get("firstName").length != 0 && data.get("lastName").length != 0 && data.get("email").length != 0 && data.get("password").length >= 6)
+        navigate("/home")
+      else{
+        alert("Please enter all the details or password should be of length 6 or more")
+      }
   };
 
   const history = useNavigate();
@@ -165,6 +178,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={register}
+  
             >
               Sign Up
             </Button>

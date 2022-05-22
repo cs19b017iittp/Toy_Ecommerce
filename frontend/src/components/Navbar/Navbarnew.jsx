@@ -71,15 +71,18 @@ const Navbarnew = () => {
             </form>
           </div>
           {/* <div> </div> */}
-          <div className="buttons">
-            <NavLink to="./signin" className="btn btn-outline-dark me-2">
+          <div className="buttons" >
+            {/* {`${this.props.navigation.getParams('bool','error') === true ?   */}
+            <NavLink to="./signin" className="btn btn-outline-dark me-2" disabled={true}>
               <i className="fa fa-sign-in me-1"></i>LOGIN
-            </NavLink>
-          </div>
-          <div className="buttons">
+            </NavLink> 
+            
+           </div>
+          <div className="buttons"> 
             <NavLink to="./signin" className="btn btn-outline-dark me-2">
               <i className="fa fa-user me-1"></i>
             </NavLink>
+            {/* }`} */}
           </div>
 
           <div className={classes.grow} />

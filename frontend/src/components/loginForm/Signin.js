@@ -43,9 +43,13 @@ export default function SignIn() {
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (
+    event
+    ) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    //const data = new FormData(event.currentTarget);
+    var mail = new FormData(document.getElementById("email"));
+    var pass = new FormData(document.getElementById("password"));
     // console.log({
     //   email: data.get("email"),
     //   password: data.get("password"),
@@ -53,15 +57,17 @@ export default function SignIn() {
     // Axios.get("http://localhost:3001/login").then((res) => {
     //   console.log("data --> " + res.data[0]);
     // });
-
+      console.log(" --> "+event.currentTarget)
     Axios.post("http://localhost:3001/login", {
       email: email,
       password: password,
     }).then((response) => {
-      var email = data.get("email");
+      // var email = data.get("email");
+      // console.log("email --> "+email+"\n");
       for (let i = 0; i < response.data.length; i++) {
-        if (response.data[i].email === email) {
-          navigate("/", true`1`);
+        if (response.data[i].email === mail) {
+          console.log("data email --> "+response.data[i].email+"\n");
+          navigate("/");
           break;
         } else {
           alert("account doesnt exists with this mail");
@@ -158,15 +164,50 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={
-                  () => {
-                    var flag = true;
-                    if (flag) navigate("/home");
-                    else {
-                      console.error("Incorrect details");
-                    }
-                  }
+                  // () => {
+                  //   var flag = true;
+                  //   if (flag) navigate("/home");
+                  //   else {
+                  //     console.error("Incorrect details");
+                  //   }
+                  // }
                   // login
+
+                  (
+                    event
+                    ) => {
+                    event.preventDefault();
+                    //console.log(event.currentTarget)
+                    //const data = new FormData(event.currentTarget);
+                    var mail = document.getElementById("email").value;
+                    var pass = document.getElementById("password").value;
+                    // console.log({
+                    //   email: data.get("email"),
+                    //   password: data.get("password"),
+                    // });
+                    // Axios.get("http://localhost:3001/login").then((res) => {
+                    //   console.log("data --> " + res.data[0]);
+                    // });
+                     // console.log("data -->  "+data)
+                    Axios.post("http://localhost:3001/login", {
+                      email: email,
+                      password: password,
+                    }).then((response) => {
+                      // var email = data.get("email");
+                      // console.log("email --> "+email+"\n");
+                      for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i].email === mail) {
+                          console.log("data email --> "+response.data[i].email+"\n");
+                          navigate("/");
+                          break;
+                        } else {
+                          alert("account doesnt exists with this mail");
+                        }
+                      }
+                    });
+                  }
                 }
+                // onClick={handleSubmit}
               >
                 Sign In
               </Button>
@@ -184,7 +225,8 @@ export default function SignIn() {
                     }
                   }
                   // login
-                }
+                
+              }
               >
                 Sign In As ADMIN
               </Button>
