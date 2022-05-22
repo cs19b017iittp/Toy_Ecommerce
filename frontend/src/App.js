@@ -11,6 +11,7 @@ import Cart from "./components/Cart";
 import AddressForm from "./components/Checkout/AddressForm";
 import AdminHome from "./components/adminDashboard/adminHome";
 import Checkout from "./components/Checkout/Checkout";
+import About from "./components/About"
 const App = () => {
   return (
     // <div>
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/adminhome" element={<AdminHome />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/about" element={<About/>} />
         {/* <Route path="/login" element={<SignIn />} /> */}
         {/* <Route path="/forget" component={SignUp} exact /> */}
       </Routes>
